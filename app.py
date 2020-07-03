@@ -45,27 +45,36 @@
         https://github.com/kushedow/flask-html/blob/master/Project%201/data.py
 
 """
-
+import json
 from flask import Flask, render_template  # подключаем модули
-import data
+from data import tours as tour, departures as depart, subtitle, description, title
 
 app = Flask(__name__)  # объявляем экземпляр фласка
 
 
 @app.route('/')  # объявим путь к главной странице
 def index():
-    return render_template('index.html', title=data.title, subtitle=data.subtitle, description=data.description,
-                           tours=data.tours, departures=data.departures)  # используем шалбон страницы
+    return render_template('index.html', title=title, tours=tour, subtitle=subtitle, departures=depart,
+                           description=description)  # используем шалбон страницы
 
 
-@app.route('/departures/<departure>/')  # путь отобразить направления
+@app.route('/departures/<departure>')  # путь отобразить направления
 def departures(departure):
-    return render_template('departure.html', departure=departure)
+    lst_depart = []
+    for t in tour:
+        if departure == tour[t]['departure']:
+            lst_depart.append(t)
+    return render_template('departure.html', title=title, tours=tour, subtitle=subtitle,
+                           lst_departures=lst_depart, departures=depart, city=departure,
+                           description=description)
 
 
-@app.route('/tours/<id_tour>/')  # путь просмотра тура
-def tours(id_tour):
-    return render_template('tour.html', id=id_tour)
+@app.route('/tours/<int:id>/')  # путь просмотра тура
+def tours(id):
+    return render_template('tour.html', title=tour[id]['title'],
+                           country=tour[id]['country'], departures=depart[tour[id]['departure']], lst_departures=depart,
+                           nights=tour[id]['nights'], description=tour[id]['description'],
+                           picture=tour[id]['picture'], price=tour[id]['price'])
 
 
 app.run('0.0.0.0', 8000, debug=True)  # запустим сервер на 8000 порту, режим отладки включенен.
