@@ -16,26 +16,27 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
 
-          {% for key in departures %}
+          {% for key in departures %}  {# заполняем ссылки в меню шапки навигации #}
 
             <li class="nav-item active">
               <a class="nav-link" href="{{ url_for('departures', departure=key) }}">{{ departures[key] }}</a>
             </li>
 
           {% endfor %}
+
         </ul>
       </div>
     </nav>
   </header>
   <main class="container mt-3">
-    <h1 class="display-5 mt-4">Летим {{ departures[city] }}</h1>
+    <h1 class="display-5 mt-4">Летим {{ departures[city]|replace("Из", "из") }}</h1>
     <p class="mb-4">
       Найдено {{ price_depart|length }} туров, от {{ price_depart|min }} до {{ price_depart|max }}
                     и от {{ count_nights|min }} ночей до {{ count_nights|max }} ночей</p>
     <!-- CARDS -->
     <div class="row mt-5">
 
-{% for key in lst_departures %}
+        {% for key in lst_departures %}   {# заполняем карточки с турами по по месту отправления #}
 
           <div class="col-4">
             <div class="card mb-4">
