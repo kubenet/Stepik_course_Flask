@@ -41,4 +41,4 @@ def tours(id):
                            picture=tour[id]['picture'], price=tour[id]['price'], stars=tour[id]['stars'])
 
 
-app.run('0.0.0.0', 8000, debug=True)  # запустим сервер на 8000 порту, режим отладки включенен.
+app.run('0.0.0.0', 8000)  # запустим сервер на 8000 порту, режим отладки включенен.
