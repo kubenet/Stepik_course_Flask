@@ -36,9 +36,9 @@ def departures(departure):
 @app.route('/tours/<int:id>/')  # путь просмотра тура
 def tours(id):
     return render_template('tour.html', title=title, tour_title=tour[id]['title'],
-                           country=tour[id]['country'], departures=depart[tour[id]['departure']], lst_departures=depart,
+                           country=tour[id]['country'], departure=depart[tour[id]['departure']], departures=depart,
                            nights=tour[id]['nights'], description=tour[id]['description'],
                            picture=tour[id]['picture'], price=tour[id]['price'], stars=tour[id]['stars'])
 
 
-app.run('0.0.0.0', 8000)  # запустим сервер на 8000 порту, режим отладки включенен.
+app.run()  # запустим сервер на 8000 порту, режим отладки включенен.
