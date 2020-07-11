@@ -18,8 +18,7 @@ def index():
 
 @app.route('/departures/<string:departure>')  # путь отобразить направления
 def departures(departure):
-
-    lst_depart = []    # список индексов туров из соответстующих направлению
+    lst_depart = []  # список индексов туров из соответстующих направлению
     price_depart = []  # список цен подходящих туров
     count_nights = []  # список кол-во ночей подходящих туров
 
@@ -41,4 +40,5 @@ def tours(id):
                            picture=tour[id]['picture'], price=tour[id]['price'], stars=tour[id]['stars'])
 
 
-app.run()  # запустим сервер на 8000 порту, режим отладки включенен.
+if __name__ == "__main__":
+    app.run()  # запустим сервер на 8000 порту, режим отладки включенен.
